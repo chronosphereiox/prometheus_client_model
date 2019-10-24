@@ -72,6 +72,7 @@ message Metric {
   optional Untyped   untyped      = 5;
   optional Histogram histogram    = 7;
   optional int64     timestamp_ms = 6;
+  optional string    trace_id     = 8;
 }
 
 message MetricFamily {
