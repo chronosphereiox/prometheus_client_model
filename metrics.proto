@@ -54,25 +54,27 @@ message Untyped {
 }
 
 message Histogram {
-  optional uint64 sample_count = 1;
-  optional double sample_sum   = 2;
-  repeated Bucket bucket       = 3; // Ordered in increasing order of upper_bound, +Inf bucket is optional.
+  optional uint64 sample_count  = 1;
+  optional double sample_sum    = 2;
+  repeated Bucket bucket        = 3; // Ordered in increasing order of upper_bound, +Inf bucket is optional.
+  map<string, string> exemplars = 4;
 }
 
 message Bucket {
   optional uint64 cumulative_count = 1; // Cumulative in increasing order.
-  optional double upper_bound = 2;      // Inclusive.
+  optional double upper_bound      = 2;      // Inclusive.
+  map<string, string> exemplars    = 3;
 }
 
 message Metric {
-  repeated LabelPair label        = 1;
-  optional Gauge     gauge        = 2;
-  optional Counter   counter      = 3;
-  optional Summary   summary      = 4;
-  optional Untyped   untyped      = 5;
-  optional Histogram histogram    = 7;
-  optional int64     timestamp_ms = 6;
-  optional string    trace_id     = 8;
+  repeated LabelPair  label        = 1;
+  optional Gauge      gauge        = 2;
+  optional Counter    counter      = 3;
+  optional Summary    summary      = 4;
+  optional Untyped    untyped      = 5;
+  optional Histogram  histogram    = 7;
+  optional int64      timestamp_ms = 6;
+  map<string, string> exemplars    = 8;
 }
 
 message MetricFamily {
